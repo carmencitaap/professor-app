@@ -1,9 +1,10 @@
 import React from 'react'
+import GetTask from '../api/functionsTask';
 
 function AnswerTask() {
     return (
         <div>
-            HOLAAAA
+            <GetTask />
         </div>
     )
 }
