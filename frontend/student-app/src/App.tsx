@@ -7,6 +7,7 @@ import Home from './components/Home';
 import AnswerTask from './components/AnswerTask';
 import Register from './api/Register';
 import Login from './api/Login'
+import CreateTask from './api/createTask';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(true);
@@ -18,7 +19,8 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" Component={Home} />
-            <Route path="/answertask" Component={AnswerTask}/>
+            <Route path="/answertask/" Component={AnswerTask}/>
+            <Route path='/creatingtask/:studentId' Component={CreateTask}/>
           </Routes>
         </Router>
       </div>
@@ -30,6 +32,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/register" Component={Register}/>
+            <Route path="/home" Component={Home}/>
           </Routes>
         </Router>
       </div>
