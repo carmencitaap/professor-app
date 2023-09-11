@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import Home from './components/Home';
-import AnswerTask from './components/AnswerTask';
+import GetTask from './api/answerTask';
 import Register from './api/Register';
 import Login from './api/Login'
 import CreateTask from './api/createTask';
@@ -21,7 +21,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/:studentId" Component={CreateTask} />
-            {/* <Route path="/answertask/" Component={AnswerTask}/> */}
+            <Route path="/:studentId/answertask/:taskId" Component={GetTask}/> 
           </Routes>
           
         </Router>

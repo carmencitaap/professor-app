@@ -1,28 +1,28 @@
 import React from 'react'
 
 function Login() {
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [isLogin, setIsLogin] = React.useState(true);
+    // const [email, setEmail] = React.useState('');
+    // const [password, setPassword] = React.useState('');
+    // const [isLogin, setIsLogin] = React.useState(true);
 
-    const handleEmail = (e: any) => {
-        setEmail(e.target.value);
-    }
+    // const handleEmail = (e: any) => {
+    //     setEmail(e.target.value);
+    // }
 
-    const handlePassword = (e: any) => {
-        setPassword(e.target.value);
-    }
+    // const handlePassword = (e: any) => {
+    //     setPassword(e.target.value);
+    // }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (email === '') {alert('Please enter email and password');}
+    // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     if (email === '') {alert('Please enter email and password');}
 
-        // TODO: Add login logic
-    }
+    //     // TODO: Add login logic
+    // }
 
-    const hanldeIsLogin = () => {
-        setIsLogin(false);
-    }
+    // const hanldeIsLogin = () => {
+    //     setIsLogin(false);
+    // }
 
     return (
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -50,10 +50,10 @@ function Login() {
                     <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
                 </div>
                 </form>
-
+{/* sdsd */}
                 <p className="mt-10 text-center text-sm text-gray-500">
                 Not a member?
-                <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" onClick={hanldeIsLogin}> Create an account </a>
+                <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500" > Create an account </a> {/*onClick={hanldeIsLogin}*/}
                 </p>
             </div>
         </div>

@@ -38,9 +38,11 @@ function CreateTask() {
 
     const [taskDiff, setTaskDiff] = useState<String>('Easy')
     const [taskType, setTaskType] = useState<String>('AQ')
+
     const [tasks, setTasks] = useState<Task[]>([])
     const [currentTask, setCurrentTask] = useState<Task | null>(null);
 
+    const [taskId, setTaskId] = useState<number | null>(null);
 
     // console.log(student?.username)
     useEffect (() => {
@@ -109,11 +111,10 @@ function CreateTask() {
                         },
                     })
                     .then((response) => response.json())
-                    .then((json) => console.log(json))
+                    .then((json) => {console.log(json); setCurrentTask(json); setTaskId(json.id);})
                     .catch((err) => {
                         console.log(err.message)
                     })
-                    console.log("TASK CREATED SUCCESSFULLY")
                 }
             })
             .catch((err) => {
@@ -122,17 +123,28 @@ function CreateTask() {
 
             fetchTask.current = false
         }
+        // console.log("safdklfdkslj",currentTask)
     }, [studentId, taskDiff, taskType, student?.username])
 
-    
+    console.log(currentTask)
+    useEffect(() => {
+        fetch (TASK_ENDPOINT+currentTask?.id+'/questions_to_task/?student_id='+studentId,{method: 'POST', headers: {'Content-type': 'application/json; charset=UTF-8',},})
+    })
 
+    const handleButton = () => { 
+        if (currentTask) {
+            window.location.replace('http://localhost:3000/'+studentId+'/answertask/'+currentTask?.id)
+        }
+    }
+    
+    console.log("safdklfdkslj",currentTask)
     return (
-        <div className="grid content-center">
+        <div className="flex flex-col">
             <div> {student?.username}</div>
-            <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/2 "> Comenzar Tarea</button>  
+            <button onClick={() => {handleButton()}} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/2 "> Comenzar Tarea</button>  
         </div>
     )
-
+        
 }
 
 export default CreateTask;

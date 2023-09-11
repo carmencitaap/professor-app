@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import StartTaskFB from '../components/callStart';
+
 
 interface Task {
     id: number;
@@ -62,6 +64,8 @@ const TASK_ENDPOINT =  'https://tsqrmn8j-8000.brs.devtunnels.ms/tasks/'
 const NUMERICQ_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/numericquestion/'
 const STUDENT_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/students/'
 const ALTERNATIVEQ_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternativequestion/'
+const QUESTIONS_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/questions/'
+const ALTERNATIVE_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternative/'
 
 // https://tsqrmn8j-8000.brs.devtunnels.ms/students/
 
@@ -74,6 +78,7 @@ function GetTask(){
     const [alternatives, setAlternatives] = useState<Alternative[]>([]);
     const [alternativeQ, setAlternativeQ] = useState<AlternativeQuestion[]>([]);
     const {studentId} = useParams();
+    const {taskId} = useParams();
 
     useEffect (() => {
         fetch(STUDENT_ENDPOINT+studentId+'/')
@@ -87,58 +92,83 @@ function GetTask(){
         })
     }, [studentId])
 
-    useEffect (() => {
-        fetch(NUMERICQ_ENDPOINT)
-        .then((response) => response.json())
-        .then(data => {
-            console.log("numeric", data);
-            setNumericQuestions(data)
-          })
-        .catch((err) => {
-            console.log(err.message)
-        })
-    }, [])
+    // useEffect (() =>{
+    //     fetch(QUESTIONS_ENDPOINT + `?task=${taskId}`)
+    //     .then((response) => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         setStudent(data)
+    //       })
+    //     .catch((err) => {
+    //         console.log(err.message)
+    //     })
+    // }, [taskId])
 
-    useEffect (() => {
-        fetch(ALTERNATIVEQ_ENDPOINT)
+    // const getNumericQ = (questionId: any) => {
+    //     fetch(NUMERICQ_ENDPOINT + `?question=${questionId}`)
+    //     .then((response) => response.json())
+    //     .then(data => {
+    //         console.log("numeric", data);
+    //         setNumericQuestions(data)
+    //       })
+    //     .catch((err) => {
+    //         console.log(err.message)
+    //     })
+    // }
+
+
+    useEffect(() => {
+        fetch(ALTERNATIVE_ENDPOINT + taskId+'/')
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setQuestions(data.questions);
+    
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }, [taskId]);
+
+      const getAlternativeQ = (questionId: any) => {
+        fetch(ALTERNATIVEQ_ENDPOINT + `?question=${questionId}`)
         .then((response) => response.json())
         .then(data => {
-            console.log("numeric", data);
+            console.log("alternative", data);
             setAlternativeQ(data)
+            console.log("alternativeQ",alternativeQ)
             setAlternatives(data['alternatives'])
-          })
+            console.log("dfskfl",alternatives)
+        })
         .catch((err) => {
             console.log(err.message)
         })
-    }, [])
+    }
+
+
 
     
-
-
-
     // if (questions?.length === 0) {
     //     return <p className='margin'>Loading...</p>;
     //   }
     
     const currentQuestion = questions[currentQuestionIndex];
-
+    
     return (
         <div className="div-question">
-            <div className="div-question">
-                { questions.map((question => (
-                    <div key={question['id']}>
-                    <p>{question['question']}</p>
-                    <p>Type: {question['type_question']}</p>
-                    <p>Subject: {question['type_subject']}</p>
-                    <p>Difficulty: {question['difficulty']}</p>
-                    <p>Hint: {question['hint']}</p>
-                    </div>
-                )))}
-            </div>
-
+            {/* <StartTaskFB taskId={taskId}/> */}
+            {questions?.map((question) => {
+                getAlternativeQ(question?.id)
+                return (
+                <div key={question.id}>
+                    <p>{question.question}</p>
+                    <p>Difficulty: {question.difficulty}</p>
+                    <getAlternatives questionId={questionId}/> 
+                </div>
+                );
+            })}
         </div>
-    )
-      
+      );
 
 }
 

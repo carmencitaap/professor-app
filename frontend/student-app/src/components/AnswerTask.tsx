@@ -1,10 +1,11 @@
 import React from 'react'
-import GetTask from '../api/functionsTask';
+import GetTask from '../api/createTask';
 
 function AnswerTask() {
     return (
         <div>
             <GetTask />
+            ola
         </div>
     )
 }
