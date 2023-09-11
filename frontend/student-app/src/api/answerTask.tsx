@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import StartTaskFB from '../components/callStart';
 import GetAlternatives from './getAlternative';
+import AnswerTask from '../components/AnswerTask';
+import AnswerAQ from './answerAQ';
 
 
 interface Task {
@@ -33,20 +35,14 @@ interface Student {
 
 interface Question {
     id: number;
-    question: String;
-    type_question: String;
-    type_subject: String;
-    difficulty: String;
-    hint: String;
+    question: string;
+    type_question: string;
+    type_subject: string;
+    difficulty: string;
+    hint: string;
 }
 
-interface NumericQuestion {
-    id: number;
-    answer: String;
-    combination: [];
-    question: number;
-}
-
+  
 interface Alternative {
     id: number;
     alternative_question: number; //question id fk
@@ -60,11 +56,9 @@ interface AlternativeQuestion {
     alternatives: [];
 }
 
-
 const TASK_ENDPOINT =  'https://tsqrmn8j-8000.brs.devtunnels.ms/tasks/'
-const NUMERICQ_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/numericquestion/'
 const STUDENT_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/students/'
-const ALTERNATIVEQ_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternativequestion/'
+const ALTERNATIVEQUESTION_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternativequestion/'
 const QUESTIONS_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/questions/'
 const ALTERNATIVE_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternative/'
 
@@ -73,104 +67,73 @@ const ALTERNATIVE_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternativ
 function GetTask(){
     const [task, setTask] = useState<Task>();
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [numericQuestions, setNumericQuestions] = useState<NumericQuestion[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [student, setStudent] = useState<Student>();
     const [alternatives, setAlternatives] = useState<Alternative[]>([]);
-    const [alternativeQ, setAlternativeQ] = useState<AlternativeQuestion[]>([]);
+    const [alternativeQuestion, setAlternativeQuestion] = useState<AlternativeQuestion[]>([]);
     const {studentId} = useParams();
     const {taskId} = useParams();
 
-    useEffect (() => {
-        fetch(STUDENT_ENDPOINT+studentId+'/')
-        .then((response) => response.json())
-        .then(data => {
-            console.log(data);
-            setStudent(data)
-          })
-        .catch((err) => {
-            console.log(err.message)
-        })
-    }, [studentId])
-
-    // useEffect (() =>{
-    //     fetch(QUESTIONS_ENDPOINT + `?task=${taskId}`)
-    //     .then((response) => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         setStudent(data)
-    //       })
-    //     .catch((err) => {
-    //         console.log(err.message)
-    //     })
-    // }, [taskId])
-
-    // const getNumericQ = (questionId: any) => {
-    //     fetch(NUMERICQ_ENDPOINT + `?question=${questionId}`)
-    //     .then((response) => response.json())
-    //     .then(data => {
-    //         console.log("numeric", data);
-    //         setNumericQuestions(data)
-    //       })
-    //     .catch((err) => {
-    //         console.log(err.message)
-    //     })
-    // }
-
-
     useEffect(() => {
-        fetch(ALTERNATIVE_ENDPOINT + taskId+'/')
+        // Obtener todas las AlternativeQuestion sin importar la tarea
+        fetch(ALTERNATIVEQUESTION_ENDPOINT)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
-            setQuestions(data.questions);
-    
+            console.log("alternative questions", data);
+            setAlternativeQuestion(data);
           })
           .catch((err) => {
-            console.log(err.message);
+            console.error(err.message);
           });
-      }, [taskId]);
+        
+          fetch(TASK_ENDPOINT+taskId+'/')
+            .then((response) => response.json())
+            .then(data => {
+                setTask(data)
+                setQuestions(data.questions)
+                console.log("questions",questions)
+                console.log("task",task)
+            })
+            .catch((err) => {
+                console.log(err.message)
+            })
 
-      const getAlternativeQ = (questionId: any) => {
-        fetch(ALTERNATIVEQ_ENDPOINT + `?question=${questionId}`)
-        .then((response) => response.json())
-        .then(data => {
-            console.log("alternative", data);
-            setAlternativeQ(data)
-            console.log("alternativeQ",alternativeQ)
-            setAlternatives(data['alternatives'])
-            console.log("dfskfl",alternatives)
-        })
-        .catch((err) => {
-            console.log(err.message)
-        })
-    }
-
-
+        fetch(STUDENT_ENDPOINT+studentId+'/')
+            .then((response) => response.json())
+            .then(data => {
+                console.log(data);
+                setStudent(data)
+                })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }, [taskId, studentId])
 
     
-    // if (questions?.length === 0) {
-    //     return <p className='margin'>Loading...</p>;
-    //   }
     
     const currentQuestion = questions[currentQuestionIndex];
-    
+    const taskIdToInt = parseInt(taskId!)
+    const studentIdToInt = parseInt(studentId!)
     return (
-        <div className="div-question">
-            {/* <StartTaskFB taskId={taskId}/> */}
-            {questions?.map((question) => {
-                getAlternativeQ(question?.id)
-                return (
-                <div key={question.id}>
-                    <p>{question.question}</p>
-                    <p>Difficulty: {question.difficulty}</p>
-                    <GetAlternatives questionId={question.id}/> 
-                </div>
-                );
-            })}
+        <div>
+            {/* <AnswerTask taskId={taskIdToInt}/> */}
+
+          <h1>{task?.description}</h1>
+            <h2>{task?.name}</h2>
+            <h3>{task?.type_task}</h3>
+            <h4>{task?.difficulty}</h4>
+          <ul> 
+            {(task && task.type_task == 'AQ' && (
+                <AnswerAQ questions={questions} taskId={taskIdToInt} studentId={studentIdToInt} />
+            ))}
+{/* 
+            {(task && task.type_task == 'N' && (
+                <AnswerN questions ={questions} taskId={taskId} studentId={studentId} />
+            ))} */}
+          </ul>
         </div>
       );
-
+      
 }
 
 export default GetTask;

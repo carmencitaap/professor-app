@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+// import photo from '../assets/writing_7792090.png';
 
 interface Task {
     id: number;
@@ -62,7 +63,7 @@ function CreateTask() {
             })
         }
     }, [studentId])
-
+    // public/writing_7792090.png
         
 
     useEffect(() => {
@@ -123,7 +124,6 @@ function CreateTask() {
 
             fetchTask.current = false
         }
-        // console.log("safdklfdkslj",currentTask)
     }, [studentId, taskDiff, taskType, student?.username])
 
     console.log(currentTask)
@@ -137,15 +137,21 @@ function CreateTask() {
         }
     }
     
-    console.log("safdklfdkslj",currentTask)
+    // console.log("safdklfdkslj",currentTask)
     return (
         <div className="grid h-screen place-items-center">
             <div className="grid grid-rows-2 gap-4">
-                <p className='font-bold text-lilac-600 content-center text-xl'> ¡Bienvenid@, {student?.username}!</p>
-                <p className='font-bold text-lilac-500'> Tienes una tarea por realizar</p>
-                <div>
-                    <button onClick={() => {handleButton()}} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/2 "> Comenzar Tarea</button> 
+                <p className='font-bold text-lilac-600 content-center text-xl-center'> ¡Bienvenid@, {student?.username}!</p>
+                <p className='font-bold text-lilac-500 text-center'> Tienes una tarea por realizar</p>
+                <div className='place-items-center'>
+                    <button onClick={() => {handleButton()}} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/2 ">
+                        <img></img>
+                        <span> Comenzar Tarea </span>
+                    </button> 
                 </div> 
+            </div>
+            <div className="grid grid-rows-2 gap-4">
+                <img src="writing_7792090.png" alt="icono" />
             </div>
             
         </div>

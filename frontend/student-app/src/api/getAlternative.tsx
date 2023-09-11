@@ -14,8 +14,7 @@ function GetAlternatives({ questionId }: { questionId: any }) {
   const [alternatives, setAlternatives] = useState<Alternative[]>([]);
 
   useEffect(() => {
-    // Hacer una solicitud GET para obtener todas las alternativas que tienen la clave foránea questionId
-    fetch(`${ALTERNATIVE_ENDPOINT}?question=${questionId}`)
+    fetch(ALTERNATIVE_ENDPOINT)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -28,8 +27,9 @@ function GetAlternatives({ questionId }: { questionId: any }) {
       .catch((error) => {
         console.error('Error fetching alternatives:', error);
       });
-  }, [questionId]);
+  }, );
 
+  
   return (
     <div>
       <h2>Alternativas de la Pregunta</h2>
