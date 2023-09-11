@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import StartTaskFB from '../components/callStart';
+import GetAlternatives from './getAlternative';
 
 
 interface Task {
@@ -163,7 +164,7 @@ function GetTask(){
                 <div key={question.id}>
                     <p>{question.question}</p>
                     <p>Difficulty: {question.difficulty}</p>
-                    <getAlternatives questionId={questionId}/> 
+                    <GetAlternatives questionId={question.id}/> 
                 </div>
                 );
             })}

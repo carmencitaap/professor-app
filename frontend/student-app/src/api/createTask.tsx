@@ -139,9 +139,15 @@ function CreateTask() {
     
     console.log("safdklfdkslj",currentTask)
     return (
-        <div className="flex flex-col">
-            <div> {student?.username}</div>
-            <button onClick={() => {handleButton()}} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/2 "> Comenzar Tarea</button>  
+        <div className="grid h-screen place-items-center">
+            <div className="grid grid-rows-2 gap-4">
+                <p className='font-bold text-lilac-600 content-center text-xl'> ¡Bienvenid@, {student?.username}!</p>
+                <p className='font-bold text-lilac-500'> Tienes una tarea por realizar</p>
+                <div>
+                    <button onClick={() => {handleButton()}} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded w-1/2 "> Comenzar Tarea</button> 
+                </div> 
+            </div>
+            
         </div>
     )
         

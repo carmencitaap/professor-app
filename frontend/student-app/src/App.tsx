@@ -8,6 +8,7 @@ import GetTask from './api/answerTask';
 import Register from './api/Register';
 import Login from './api/Login'
 import CreateTask from './api/createTask';
+import GetStudentInfo from './api/getStudentInfo';
 
 function App() {
   // const [currentUser, setCurrentUser] = useState(true);
@@ -15,10 +16,10 @@ function App() {
   // if (currentUser) { 
   return (
       <div>
-        <NavBar />
         
         {/* <CreateTask/> */}
         <Router>
+          <GetStudentInfo/>
           <Routes>
             <Route path="/:studentId" Component={CreateTask} />
             <Route path="/:studentId/answertask/:taskId" Component={GetTask}/> 
