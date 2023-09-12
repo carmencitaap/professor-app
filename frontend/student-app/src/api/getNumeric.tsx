@@ -205,7 +205,7 @@ function GetNumeric() {
                   disabled={!email}
                   className="!absolute right-1 top-1 rounded"
                 >
-                  Invite
+                  Enviar
                 </Button>
               </div>
             ) }
