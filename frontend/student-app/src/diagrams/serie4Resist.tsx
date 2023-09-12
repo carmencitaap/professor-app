@@ -76,11 +76,11 @@ function Serie4Resist(props: any) {
       -55z"/>
       <path d="M126 1052 c-3 -6 -1 -14 5 -17 15 -10 25 3 12 16 -7 7 -13 7 -17 1z"/>
       </g>
-      <text x="130" y="110" fontSize="15" textAnchor="middle">{props.volt} V</text>
-      <text x="230" y="60" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
-      <text x="330" y="120" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
-      <text x="330" y="160" fontSize="15" textAnchor="middle">{props.r3} ohm</text>
-      <text x="330" y="180" fontSize="15" textAnchor="middle">{props.r4} ohm</text>
+      <text x="120" y="100" fontSize="15" textAnchor="middle">{props.volt} V</text>
+      <text x="150" y="60" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
+      <text x="280" y="60" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
+      <text x="300" y="100" fontSize="15" textAnchor="middle">{props.r3} ohm</text>
+      <text x="210" y="140" fontSize="15" textAnchor="middle">{props.r4} ohm</text>
     </svg>
   )
 }

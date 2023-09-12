@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import StartTaskFB from '../components/callStart';
-import GetAlternatives from './getAlternative';
-import AnswerTask from '../components/AnswerTask';
-import AnswerAQ from './answerAQ';
 
+import AnswerAQ from './answerAQ';
+import GetNumeric from './getNumeric';
 
 interface Task {
     id: number;
@@ -17,7 +16,6 @@ interface Task {
     xp_in_task: number;
     difficulty: String;
     wrong_answer: [];
-
 }
 
 interface Student {
@@ -42,7 +40,6 @@ interface Question {
     hint: string;
 }
 
-  
 interface Alternative {
     id: number;
     alternative_question: number; //question id fk
@@ -59,12 +56,9 @@ interface AlternativeQuestion {
 const TASK_ENDPOINT =  'https://tsqrmn8j-8000.brs.devtunnels.ms/tasks/'
 const STUDENT_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/students/'
 const ALTERNATIVEQUESTION_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternativequestion/'
-const QUESTIONS_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/questions/'
-const ALTERNATIVE_ENDPOINT = 'https://tsqrmn8j-8000.brs.devtunnels.ms/alternative/'
 
-// https://tsqrmn8j-8000.brs.devtunnels.ms/students/
 
-function GetTask(){
+function AnswerTask(){
     const [task, setTask] = useState<Task>();
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -73,6 +67,28 @@ function GetTask(){
     const [alternativeQuestion, setAlternativeQuestion] = useState<AlternativeQuestion[]>([]);
     const {studentId} = useParams();
     const {taskId} = useParams();
+
+    useEffect(() => {
+        fetch(TASK_ENDPOINT + `${taskId}/questions_to_task/?student_id=${studentId}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json(); 
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        })
+        .then(data => {
+            console.log(data.message)
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+    }, [taskId, studentId])
 
     useEffect(() => {
         // Obtener todas las AlternativeQuestion sin importar la tarea
@@ -110,30 +126,26 @@ function GetTask(){
     }, [taskId, studentId])
 
     
-    
-    const currentQuestion = questions[currentQuestionIndex];
     const taskIdToInt = parseInt(taskId!)
     const studentIdToInt = parseInt(studentId!)
     return (
         <div>
             {/* <AnswerTask taskId={taskIdToInt}/> */}
-
           <h1>{task?.description}</h1>
             <h2>{task?.name}</h2>
             <h3>{task?.type_task}</h3>
             <h4>{task?.difficulty}</h4>
           <ul> 
-            {(task && task.type_task == 'AQ' && (
+            {(task && task.type_task == 'AQ'  &&(
                 <AnswerAQ questions={questions} taskId={taskIdToInt} studentId={studentIdToInt} />
             ))}
-{/* 
+
             {(task && task.type_task == 'N' && (
-                <AnswerN questions ={questions} taskId={taskId} studentId={studentId} />
-            ))} */}
+                <GetNumeric questions={questions} taskId={taskIdToInt} studentId={studentIdToInt} />
+            ))}
           </ul>
         </div>
       );
-      
 }
 
-export default GetTask;
+export default AnswerTask;

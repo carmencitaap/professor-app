@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Mixto4ResTipo2() {
+function Mixto4ResTipo2(props: any) {
     return (
         <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
         width="502.000000pt" height="244.000000pt" viewBox="0 0 502.000000 244.000000"
@@ -79,6 +79,12 @@ function Mixto4ResTipo2() {
             <path d="M60 1225 c0 -8 7 -15 15 -15 8 0 15 7 15 15 0 8 -7 15 -15 15 -8 0
             -15 -7 -15 -15z"/>
             </g>
+
+            <text x="55" y="165" fontSize="15" textAnchor="middle">{props.volt}V</text>
+            <text x="155" y="75" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
+            <text x="185" y="120" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
+            <text x="320" y="75" fontSize="15" textAnchor="middle">{props.r3} ohm</text>
+            <text x="350" y="120" fontSize="15" textAnchor="middle">{props.r4} ohm</text>
         </svg>
     )
 }

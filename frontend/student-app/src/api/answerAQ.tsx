@@ -36,7 +36,7 @@ function AnswerAQ({ questions, taskId, studentId }: AnswerAQProps) {
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
-
+  const [questionOfTask, setQuestionOfTask] = useState<Question[]>([]);
 
 
   useEffect(() => {

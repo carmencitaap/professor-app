@@ -50,10 +50,10 @@ function Serie3Resist(props: any) {
         <path d="M76 1049 l-24 -54 24 -3 24 -3 3 -172 3 -172 2 173 2 172 25 0 25 0
         -17 38 c-37 81 -40 82 -67 21z"/>
         </g>
-        <text x="130" y="110" fontSize="15" textAnchor="middle">{props.volt}V</text>
-        <text x="230" y="60" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
-        <text x="330" y="120" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
-        <text x="330" y="120" fontSize="15" textAnchor="middle">{props.r3} ohm</text> 
+        <text x="100" y="100" fontSize="15" textAnchor="middle">{props.volt}V</text>
+        <text x="120" y="60" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
+        <text x="265" y="60" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
+        <text x="285" y="110" fontSize="15" textAnchor="middle">{props.r3} ohm</text> 
       </svg>
   )
 }

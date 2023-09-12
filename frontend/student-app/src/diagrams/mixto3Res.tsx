@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Mixto3Res() {
+function Mixto3Res(props: any) {
   return (
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
     width="588.000000pt" height="266.000000pt" viewBox="0 0 588.000000 266.000000"
@@ -71,6 +71,11 @@ function Mixto3Res() {
         <path d="M200 1405 c0 -8 7 -15 15 -15 8 0 15 7 15 15 0 8 -7 15 -15 15 -8 0
         -15 -7 -15 -15z"/>
         </g>
+
+        <text x="60" y="180" fontSize="15" textAnchor="middle">{props.volt}V</text>
+        <text x="165" y="85" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
+        <text x="300" y="125" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
+        <text x="460" y="125" fontSize="15" textAnchor="middle">{props.r3} ohm</text>
     </svg>
   )
 }

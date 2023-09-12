@@ -7,9 +7,10 @@ import Home from './components/Home';
 import GetTask from './api/answerTask';
 import Register from './api/Register';
 import Login from './api/Login'
-import CreateTask from './api/createTask';
-import GetStudentInfo from './api/getStudentInfo';
+// import GetStudentInfo from './api/getStudentInfo';
 import GetNumeric from './api/getNumeric';
+import FinishNumeric from './api/finishNumeric';
+import AnswerTask from './api/answerTask';
 // import DrawDiagram from './api/drawCircuit'
 
 function App() {
@@ -21,13 +22,15 @@ function App() {
         
         {/* <CreateTask/> */}
         <Router>
-          <GetStudentInfo/>
+          {/* <GetStudentInfo/> */}
           {/* <Circuit/> */}
           <Routes>
-            <Route path="/:studentId" Component={CreateTask} />
-            <Route path="/:studentId/answertask/:taskId" Component={GetTask}/> 
-            <Route path="/:studentId/getNumeric/:taskId" Component={GetNumeric} />
+            <Route path='home/:studentId' Component={Home}/>
+            {/*<Route path="/:studentId" Component={CreateTask} />*/}
+            <Route path="/:studentId/answertask/:taskId" Component={AnswerTask}/> 
+            <Route path="/student/:studentId/getNumeric/:taskId" Component={GetNumeric} />
             {/* <Route path='/'></Route> */}
+            <Route path="/student/:studentId/finishnumeric/:taskId" Component={FinishNumeric}/>
           </Routes>
           
         </Router>

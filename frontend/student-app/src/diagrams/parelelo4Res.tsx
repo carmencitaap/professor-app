@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Paralelo4Res() {
+function Paralelo4Res(props: any) {
   return (
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
     width="864.000000pt" height="202.000000pt" viewBox="0 0 864.000000 202.000000"
@@ -74,6 +74,12 @@ function Paralelo4Res() {
       -19 50 -14 28 -27 50 -28 50 -1 0 -17 -29 -35 -65z"/>
       <path d="M70 1044 c0 -9 5 -14 12 -12 18 6 21 28 4 28 -9 0 -16 -7 -16 -16z"/>
       </g>
+
+      <text x="50" y="150" fontSize="15" textAnchor="middle">{props.volt}V</text>
+      <text x="175" y="100" fontSize="15" textAnchor="middle">{props.r1} ohm</text>
+      <text x="340" y="100" fontSize="15" textAnchor="middle">{props.r2} ohm</text>
+      <text x="505" y="100" fontSize="15" textAnchor="middle">{props.r3} ohm</text>
+      <text x="670" y="100" fontSize="15" textAnchor="middle">{props.r4} ohm</text>
     </svg>
   )
 }
