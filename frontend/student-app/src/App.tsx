@@ -10,6 +10,7 @@ import Login from './api/Login'
 import CreateTask from './api/createTask';
 import GetStudentInfo from './api/getStudentInfo';
 import GetNumeric from './api/getNumeric';
+// import DrawDiagram from './api/drawCircuit'
 
 function App() {
   // const [currentUser, setCurrentUser] = useState(true);
@@ -21,10 +22,12 @@ function App() {
         {/* <CreateTask/> */}
         <Router>
           <GetStudentInfo/>
+          {/* <Circuit/> */}
           <Routes>
             <Route path="/:studentId" Component={CreateTask} />
             <Route path="/:studentId/answertask/:taskId" Component={GetTask}/> 
             <Route path="/:studentId/getNumeric/:taskId" Component={GetNumeric} />
+            {/* <Route path='/'></Route> */}
           </Routes>
           
         </Router>
