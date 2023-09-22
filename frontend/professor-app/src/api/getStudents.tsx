@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Text, Metric } from "@tremor/react";
+import { Card, Text } from "@tremor/react";
 
 const STUDENT_ENDPOINT = 'http://localhost:8000/students/';
 
@@ -23,15 +23,11 @@ function GetStudents() {
     return (
         <div>
             <h1>Students</h1>
-            <div>
+            <Card className="max-w-xs mx-auto" decoration="top" decorationColor="indigo">
                 {students.map((student: any) => (
-                        <p>{student.username} {student.email} </p>
+                        <Text>{student.username} {student.email} </Text>
                     
                 ))}
-            </div>
-            <Card className="max-w-xs mx-auto" decoration="top" decorationColor="indigo">
-                <Text>Sales</Text>
-                <Metric>$ 34,743</Metric>
             </Card>
         </div>
     );
