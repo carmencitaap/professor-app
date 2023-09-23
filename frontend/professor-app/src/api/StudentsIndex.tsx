@@ -39,7 +39,7 @@ function GetStudents() {
                         </p>
                     </div>
 
-                    <button onClick={() => goToStudent(student.id)} className="bg-transparent hover:bg-violet-400 text-violet-500 font-semibold hover:text-white py-2 px-4 border border-violet-400 hover:border-transparent rounded mb-1.5">
+                    <button onClick={() => goToStudent(student.id)} className="bg-transparent button-pink font-semibold hover:text-white py-2 px-4 border border-violet-400 hover:border-transparent rounded mb-1.5">
                         See Student
                     </button>
                 </div>

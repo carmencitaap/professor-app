@@ -9,9 +9,29 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(237,233,254);
+  background: linear-gradient(90deg, rgba(237,233,254,1) 0%, rgba(221,214,254,1) 35%, rgba(196,181,253,1) 100%);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.button-pink {
+  color: #CB6CE6;
+  border: 1px solid #CB6CE6;
+}
+
+.button-pink:hover {
+  background-color: #c74beb;
+  color: white;
+}
+
+.nav-text {
+  color: #111827;
+}
+
+.nav-text:hover {
+  color: #c74beb;
 }

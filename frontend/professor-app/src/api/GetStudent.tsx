@@ -77,7 +77,7 @@ function GetStudent() {
 
 
 
-            <button onClick={() => handleGoBack()} className="bg-transparent hover:bg-violet-400 text-violet-500 font-semibold hover:text-white py-2 px-4 border border-violet-400 hover:border-transparent rounded mb-1.5">
+            <button onClick={() => handleGoBack()} className="bg-transparent button-pink font-semibold hover:text-white py-2 px-4 border border-violet-400 hover:border-transparent rounded mb-1.5">
                 Go back to all students
             </button>
         </div>
