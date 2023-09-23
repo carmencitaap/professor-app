@@ -7,6 +7,7 @@ import GeneralDashboard from './components/GeneralDashboard';
 import StudentDashboard from './components/StudentDashboard';
 import Welcome from './components/Welcome';
 import ShowStudent from './components/ShowStudent';
+import CreateQuestion from './components/CreateQuestion';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/generaldashboard" Component={GeneralDashboard}/> 
           <Route path="/studentsindex" Component={StudentDashboard}/>
           <Route path="/student/:studentId" Component={ShowStudent}/>
+          <Route path="/newaq" Component={CreateQuestion}/>
         </Routes>
       </Router>
     </div>
