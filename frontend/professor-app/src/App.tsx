@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import GeneralDashboard from './components/GeneralDashboard';
 import StudentDashboard from './components/StudentDashboard';
 import Welcome from './components/Welcome';
+import ShowStudent from './components/ShowStudent';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Routes>
           <Route path='/' Component={Welcome} />
           <Route path="/generaldashboard" Component={GeneralDashboard}/> 
-          <Route path="/studentdashboard" Component={StudentDashboard}/>
+          <Route path="/studentsindex" Component={StudentDashboard}/>
+          <Route path="/student/:studentId" Component={ShowStudent}/>
         </Routes>
       </Router>
     </div>

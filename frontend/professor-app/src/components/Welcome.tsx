@@ -6,7 +6,7 @@ function Welcome() {
             <h1 className="text-4xl font-bold text-center">IntelliCourse</h1>
             <br/>
             <p className="text-xl text-center">Welcome to IntelliCourse!</p>
-            <p className="text-xl text-center">Please select a dashboard from the navigation bar above.</p>
+            <p className="text-xl text-center">Please select an action from the navigation bar above.</p>
             <p className="text-xl text-center">There you will see detailed info about te progress of all students.</p>
         </div>
     )

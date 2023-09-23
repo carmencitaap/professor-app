@@ -1,5 +1,5 @@
 import React from 'react';
-import GetStudents from '../api/getStudents';
+import GetStudents from '../api/StudentsIndex';
 
 function StudentDashboard() {
     return (
