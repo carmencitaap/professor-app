@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import CreateAlternatives from './NewAlternatives';
+
 
 // 1. Crear pregunta con título, tipo, materia, dificultad y pista. Pasar AQ desde el principio.
 // 2. Creat AlternativeQuestion.
 // 3. Crear alternativas asociadas a esa question con Answer e is_correct.
 
 const QUESTION_ENDPOINT = "http://localhost:8000/questions/"
+const ALTERNATIVEQ_ENDPOINT = "http://localhost:8000/alternativequestion/"
 
 function CreateAQ() {
     const [title, setTitle] = useState("");
@@ -15,6 +18,11 @@ function CreateAQ() {
     console.log(title,subject,difficulty, hint)
 
     const [questionCreated, setQuestionCreated] = useState(null);
+    const [AQCreated, setAQCreated] = useState(null);
+
+    
+    const [showCreateAQForm, setShowCreateAQForm] = useState(true);
+    const [showAlternativesForm, setShowAlternativesForm] = useState(true);
 
     const createQuestion = () => {
         fetch(QUESTION_ENDPOINT, {
@@ -34,16 +42,39 @@ function CreateAQ() {
         .then(data => {
             console.log("Question created successfully.")
             console.log(data)
-            setQuestionCreated(data)        
+            setQuestionCreated(data);
+            createAQ(data.id);
         })
-        
+        .catch(error => console.log(error))
+        setShowCreateAQForm(false);
+    }
+
+    const createAQ = (questionId:any) => {
+        fetch(ALTERNATIVEQ_ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                question: questionId
+            })
+        })
+        .then(response => response.json())
+
+        .then(data => {
+            console.log("Alternative Question created successfully.")
+            console.log(data)
+            setAQCreated(data);
+        })
         .catch(error => console.log(error))
     }
 
+
     return (
         <div className="flex flex-col justify-center items-center">
+            {showCreateAQForm && (
             <div className="rounded overflow-hidden shadow-lg p-6 bg-slate-50">
-                <h1 className="text-2xl font-semibold mb-5"> Creating an Alternative Question </h1>
+                <h1 className="text-2xl font-semibold mb-5"> Creating an Alternatives Question </h1>
                 <form className="w-full max-w-sm">
                     {/* Título pregunta */}
                     <div className="md:flex md:items-center mb-6">
@@ -122,17 +153,21 @@ function CreateAQ() {
                     </div>
 
                     <div className="md:flex md:items-center">
-                        <div className="md:w-1/3"></div>
+                        <div className="md:w-16"></div>
                         <div className="md:w-2/3">
-                        <button onClick={() => createQuestion()} className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-                            Sign Up
+                        <button onClick={() => createQuestion()} className="shadow button-pink focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                            Create Question
                         </button>
                         </div>
                     </div>
-                    
-
                 </form>
             </div>
+            )}
+
+
+            {showAlternativesForm && (
+                <CreateAlternatives questionId={AQCreated?.id} />
+                )}
         </div>
     )
 }
