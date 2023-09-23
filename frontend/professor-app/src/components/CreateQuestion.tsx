@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateAQ from '../api/NewAlternativeQuestion';
+import CreateAQ from '../api/Alternatives/NewAlternativeQuestion';
 
 function CreateQuestion() {
     return (
