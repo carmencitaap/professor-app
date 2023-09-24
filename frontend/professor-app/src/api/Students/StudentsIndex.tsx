@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const STUDENT_ENDPOINT = 'http://localhost:8000/students/';
+const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
 
 function GetStudents() {
     const [students, setStudents] = useState([]);

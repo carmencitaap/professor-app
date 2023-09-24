@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { TrashIcon, PencilIcon } from '@heroicons/react/solid';
 
 
-const QUESTION_ENDPOINT = "http://localhost:8000/questions/"
+const QUESTION_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/"
 
 
 function AlternativeQuestionsIndex() {
@@ -14,7 +14,8 @@ function AlternativeQuestionsIndex() {
         .then((response) => response.json())
         .then(data => {
             console.log(data);
-            setQuestions(data)
+            const alternativeQuestions = data.filter((question: any)=> question.type_question === "AQ")
+            setQuestions(alternativeQuestions);
             })
         .catch((err) => {
             console.log(err.message)
@@ -28,6 +29,27 @@ function AlternativeQuestionsIndex() {
     const handleOnClick = () => {
         window.location.replace("/newaq");
     }
+
+    const editQuestion = () => {
+
+    }
+
+    const deleteQuestion = () => {
+        fetch(QUESTION_ENDPOINT, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    }
+
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -50,13 +72,12 @@ function AlternativeQuestionsIndex() {
                     {questions.map((question: any) => (
                         <tr key={question.id} className="border-b bg-neutral-50 hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{question.id}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{question.question}</td>
+                            <td className="whitespace-nowrap px-6 py-4 w-2/4">{question.question}</td>
                             <td className="whitespace-nowrap px-6 py-4">{question.type_question}</td>
                             <td className="whitespace-nowrap px-6 py-4">{question.type_subject}</td>
                             <td className="flex">
-                                
-                                <PencilIcon className="h-7 w-7 text gray-400 mt-3 mr-5"/>
-                                <TrashIcon className="h-7 w-7 text-red-600 mt-3"/>
+                                <PencilIcon onClick={editQuestion} className="h-7 w-7 text gray-400 mt-3 mr-5"/>
+                                <button> <TrashIcon onClick={deleteQuestion} className="h-7 w-7 text-red-600 mt-3"/> </button>
                             </td>
                         </tr>
                         ))}

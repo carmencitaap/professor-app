@@ -6,8 +6,8 @@ import CreateAlternatives from './NewAlternatives';
 // 2. Creat AlternativeQuestion.
 // 3. Crear alternativas asociadas a esa question con Answer e is_correct.
 
-const QUESTION_ENDPOINT = "http://localhost:8000/questions/"
-const ALTERNATIVEQ_ENDPOINT = "http://localhost:8000/alternativequestion/"
+const QUESTION_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/"
+const ALTERNATIVEQ_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternativequestion/"
 
 function CreateAQ() {
     const [title, setTitle] = useState("");
