@@ -13,7 +13,7 @@ function AlternativeQuestionsIndex() {
         fetch(QUESTION_ENDPOINT)
         .then((response) => response.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             const alternativeQuestions = data.filter((question: any)=> question.type_question === "AQ")
             setQuestions(alternativeQuestions);
             })
@@ -34,16 +34,15 @@ function AlternativeQuestionsIndex() {
 
     }
 
-    const deleteQuestion = () => {
-        fetch(QUESTION_ENDPOINT, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            }
+    const deleteQuestion = (question_id: any) => {
+        fetch(`${QUESTION_ENDPOINT}${question_id}/`, {
+            method: "DELETE"
         })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
+        .then((response) => {
+            // response.json()
+            if (response.status === 204) {
+                setQuestions(questions.filter((question: any) => question.id !== question_id))
+            }
         })
         .catch((err) => {
             console.log(err.message)
@@ -77,7 +76,7 @@ function AlternativeQuestionsIndex() {
                             <td className="whitespace-nowrap px-6 py-4">{question.type_subject}</td>
                             <td className="flex">
                                 <PencilIcon onClick={editQuestion} className="h-7 w-7 text gray-400 mt-3 mr-5"/>
-                                <button> <TrashIcon onClick={deleteQuestion} className="h-7 w-7 text-red-600 mt-3"/> </button>
+                                <button> <TrashIcon onClick={() => deleteQuestion(question.id)} className="h-7 w-7 text-red-600 mt-3"/> </button>
                             </td>
                         </tr>
                         ))}

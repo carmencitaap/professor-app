@@ -1,0 +1,6 @@
+/ /index.html 200
+/generaldashboard /index.html 200
+/studentsindex /index.html 200
+/student/:studentId/* /index.html 200
+/newaq /index.html 200
+/questionsindex /index.html 200
