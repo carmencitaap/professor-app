@@ -9,7 +9,7 @@ import CreateAlternatives from './NewAlternatives';
 const QUESTION_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/"
 const ALTERNATIVEQ_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternativequestion/"
 
-function CreateAQ() {
+function CreateAQ(props: any) {
     const [title, setTitle] = useState("");
     const [subject, setSubject] = useState("");
     const [difficulty, setDifficulty] = useState("");
@@ -20,9 +20,6 @@ function CreateAQ() {
     const [questionCreated, setQuestionCreated] = useState(null);
     const [AQCreated, setAQCreated] = useState(null);
 
-    
-    const [showCreateAQForm, setShowCreateAQForm] = useState(true);
-    const [showAlternativesForm, setShowAlternativesForm] = useState(true);
 
     const createQuestion = () => {
         fetch(QUESTION_ENDPOINT, {
@@ -44,9 +41,11 @@ function CreateAQ() {
             console.log(data)
             setQuestionCreated(data);
             createAQ(data.id);
+
+            props.closeModal();
+            props.fetchQuestions();
         })
         .catch(error => console.log(error))
-        setShowCreateAQForm(false);
     }
 
     const createAQ = (questionId:any) => {
@@ -72,9 +71,16 @@ function CreateAQ() {
 
     return (
         <div className="flex flex-col justify-center items-center">
-            {showCreateAQForm && (
-            <div className="rounded overflow-hidden shadow-lg p-6 bg-slate-50">
-                <h1 className="text-2xl font-semibold mb-5"> Creating an Alternatives Question </h1>
+            <div className="rounded overflow-hidden shadow-xl shadow-indigo-500/40 p-6 bg-slate-50">
+               <div className="flex justify-end">
+                    <button onClick={()=>props.closeModal()}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 r-0">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <h1 className="text-2xl font-semibold mb-5"> Creating an Alternative Question </h1>
                 <form className="w-full max-w-sm">
                     {/* Título pregunta */}
                     <div className="md:flex md:items-center mb-6">
@@ -162,12 +168,6 @@ function CreateAQ() {
                     </div>
                 </form>
             </div>
-            )}
-
-
-            {showAlternativesForm && (
-                <CreateAlternatives questionId={AQCreated?.id} />
-                )}
         </div>
     )
 }

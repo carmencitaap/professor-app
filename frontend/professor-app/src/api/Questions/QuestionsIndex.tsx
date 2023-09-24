@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { TrashIcon, PencilIcon } from '@heroicons/react/solid';
+import Popup from 'reactjs-popup';
+
+
+import CreateAQ from '../Alternatives/NewAlternativeQuestion';
 
 
 const QUESTION_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/"
@@ -8,12 +12,12 @@ const QUESTION_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app
 
 function AlternativeQuestionsIndex() {
     const [questions, setQuestions] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const fetchQuestions = useCallback(() => {
         fetch(QUESTION_ENDPOINT)
         .then((response) => response.json())
         .then(data => {
-            // console.log(data);
             const alternativeQuestions = data.filter((question: any)=> question.type_question === "AQ")
             setQuestions(alternativeQuestions);
             })
@@ -26,9 +30,9 @@ function AlternativeQuestionsIndex() {
         fetchQuestions()
     }, [fetchQuestions])
 
-    const handleOnClick = () => {
-        window.location.replace("/newaq");
-    }
+    // const handleOnClick = () => {
+    //     window.location.replace("/newaq");
+    // }
 
     const editQuestion = () => {
 
@@ -39,7 +43,6 @@ function AlternativeQuestionsIndex() {
             method: "DELETE"
         })
         .then((response) => {
-            // response.json()
             if (response.status === 204) {
                 setQuestions(questions.filter((question: any) => question.id !== question_id))
             }
@@ -49,13 +52,32 @@ function AlternativeQuestionsIndex() {
         })
     }
 
+    const closeModal = () => {
+        console.log("closing modal")
+        setModalOpen(false);
+    }
+
+    const toggleModal = () => {
+        setModalOpen(!modalOpen);
+    }
 
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="relative overflow-x-auto w-4/5">
                 <div className="flex">
                     <div className="w-10/12"></div>
-                    <button onClick={()=> handleOnClick()} className="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded"> + Create Question </button>
+
+                    <button onClick={() => {toggleModal();}} className="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded"> + Create Question </button>
+
+                    {modalOpen && (
+                         <div className="modal-container">
+                            <CreateAQ closeModal={closeModal} fetchQuestions={fetchQuestions()}/>
+                        </div>
+                    )}
+                    
+                    
+
+                    {/* <button onClick={()=> handleOnClick()} className="bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded"> + Create Question </button> */}
                 </div>
                 <table className="w-full text-sm text-left text-gray-800 dark:text-gray-400 mt-3 mb-3">
                     <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
