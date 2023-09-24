@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CreateAlternatives from './NewAlternatives';
 
 
 // 1. Crear pregunta con título, tipo, materia, dificultad y pista. Pasar AQ desde el principio.

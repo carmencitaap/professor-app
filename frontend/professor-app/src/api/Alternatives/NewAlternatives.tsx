@@ -35,6 +35,13 @@ function CreateAlternatives(props: any) {
 
     return (
         <div className="rounded overflow-hidden shadow-lg p-6 bg-slate-50 ">
+            <div className="flex justify-end">
+                <button onClick={()=>props.closeAltModal()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 r-0">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
             <h1 className="text-2xl font-semibold mb-5"> Creating question's alternatives </h1>
             <form className="w-full max-w-sm">
                 {/* Alternativas */}
