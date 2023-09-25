@@ -85,7 +85,7 @@ function StudentProgress() {
                       }
                 questionFreqArray.push(questionFreq)
             }
-            console.log("Incorrect frequency per question:",questionFreqArray)
+            console.log("Correct frequency per question:",questionFreqArray)
 
             for (let i=0; i<questionFreqArray.length; i++) {
                 if (questionFreqArray[i].frequency > 0) {
