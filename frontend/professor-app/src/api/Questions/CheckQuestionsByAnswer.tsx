@@ -77,9 +77,11 @@ function CheckQuestionsByAns() {
                     subject: questions[i].type_subject
                 }
                 for (let j=0; j<students.length; j++) {
-                    for (let k=0; k<students[j].incorrectly_answered_questions.length; k++) {
-                        if (students[j].incorrectly_answered_questions[k] === questions[i].id) {
-                            questionFreq.frequency += 1
+                    if (students[j].incorrectly_answered_questions) {
+                        for (let k=0; k<students[j].incorrectly_answered_questions.length; k++) {
+                            if (students[j].incorrectly_answered_questions[k] === questions[i].id) {
+                                questionFreq.frequency += 1
+                            }
                         }
                     }
                 }
@@ -117,7 +119,7 @@ function CheckQuestionsByAns() {
 
     return (
         <div className="flex justify-center items-center">
-            <Card className="w-1/3">
+            <Card className="w-1/3 mb-10">
                 <h1 className="text-2xl font-semibold"> Questions that have been the hardest </h1>
                 <h4 className="text-sm font-light"> By how many times they were answered incorrectly </h4>
                 <DonutChart

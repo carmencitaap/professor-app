@@ -78,11 +78,13 @@ function StudentProgress() {
                     frequency: 0,
                     subject: questions[i].type_subject
                 }
-                for (let k=0; k<student.correctly_answered_questions.length; k++) {
-                        if (student.correctly_answered_questions[k] === questions[i].id) {
-                            questionFreq.frequency += 1
+                if (student.correctly_answered_questions) {
+                    for (let k=0; k<student.correctly_answered_questions.length; k++) {
+                            if (student.correctly_answered_questions[k] === questions[i].id) {
+                                questionFreq.frequency += 1
+                            }
                         }
-                      }
+                    }
                 questionFreqArray.push(questionFreq)
             }
             console.log("Correct frequency per question:",questionFreqArray)
