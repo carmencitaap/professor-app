@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import StudentProgress from './StudentProgressBySubj';
+import StudentsByXP from './StudentsByXP';
 
 
 const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
@@ -77,11 +78,13 @@ function GetStudent() {
                         <div className="w-52"></div>
                         <StudentProgress/>
                     </div>
+
+                    <StudentsByXP/>
             
                 </div>
             </div>
             
-            <button onClick={() => handleGoBack()} className="bg-transparent button-pink font-semibold hover:text-white py-2 px-4 border border-violet-400 hover:border-transparent rounded mb-1.5">
+            <button onClick={() => handleGoBack()} className="bg-transparent button-pink font-semibold hover:text-white py-2 px-4 border border-violet-400 hover:border-transparent rounded mb-5">
                 Go back to all students
             </button>
         </div>
