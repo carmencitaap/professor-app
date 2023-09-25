@@ -25,9 +25,9 @@ function GetStudents() {
     return (
         <div>
             <h1 className="text-3xl font-bold py-2 pb-2">Students</h1>
-            <div className="flex flex-row justify-center space-x-4">
+            <div className="grid grid-cols-4 gap-5 justify-center px-10 py-3">
             {students.map((student: any) => (
-                <div key={student.id} className="w-64 h-44 max-w-sm rounded overflow-hidden shadow-lg bg-slate-50">
+                <div key={student.id} className="w-68 h-44 max-w-sm rounded overflow-hidden shadow-lg bg-slate-50">
                     <div className="px-6 py-4">
                         <div className="font-bold text-xl mb-2">Student #{student.id}</div>
                         <p className="text-gray-700 text-base">
