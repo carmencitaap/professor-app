@@ -61,9 +61,9 @@ function StudentsAndProgress() {
                         <tbody>
                             {students.map((student: any) => (
                                 <tr key={student.id} className="border-b hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                                    <td> {student.username} </td>
-                                    <td> Level {student.level} </td>
-                                    <td> {student.xp} </td>
+                                    <td className="whitespace-nowrap px-2 py-4"> {student.username} </td>
+                                    <td className="whitespace-nowrap px-2 py-4"> Level {student.level} </td>
+                                    <td className="whitespace-nowrap px-2 py-4"> {student.xp} </td>
                                 </tr>
                             ))}
                         </tbody>
