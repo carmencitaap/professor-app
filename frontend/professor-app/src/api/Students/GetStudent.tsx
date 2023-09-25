@@ -11,6 +11,8 @@ function GetStudent() {
     const [student, setStudent] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [studentTask, setStudentTask] = useState();
+    const [taskQuestions, setTaskQuestions] = useState([]);
+    const [dataTask, setDataTask] = useState({});
     const { studentId } = useParams();
 
     const fetchStudent = useCallback(() => {
@@ -51,7 +53,7 @@ function GetStudent() {
                 if (tasks[i].student === student['id']) {      
                     console.log("SIUUU ")     
                     setStudentTask(tasks[i]);
-                    console.log(studentTask);
+                    setTaskQuestions(tasks[i].questions)
                 }
             }
         }
@@ -65,14 +67,56 @@ function GetStudent() {
         window.location.replace('/studentsindex');
     }
 
+    useEffect(() => {
+        if (studentTask && taskQuestions) {
+            getCorrectAndIncorrectByTask()
+        }
+    }, [studentTask,taskQuestions])
+
+    const getCorrectAndIncorrectByTask = () => {
+        console.log("student Task", studentTask);
+        console.log("task questions", taskQuestions);
+
+        
+        if (studentTask && taskQuestions) {
+            const dataTask = {
+                task: studentTask['id'],
+                student: student['id'],
+                number_of_questions: taskQuestions.length,
+                correct: 0,
+                incorrect: 0
+            }
+
+            for (let i=0; i<taskQuestions.length; i++) {
+                if (student['correctly_answered_questions'].includes(taskQuestions[i]['id'])) {
+                    dataTask['correct'] += 1
+                } else if (student['correctly_answered_questions'].includes(taskQuestions[i]['id'])) {
+                    dataTask['incorrect'] += 1
+                }
+            }
+            console.log("dataTask", dataTask);
+            setDataTask(dataTask)
+            return dataTask;
+        }
+
+    }
+
+
     return (
         <div>
             <div className='text-2xl font-semibold py-3'> Stats for {student['username']} </div>
             
             <div className="flex justify-center items-center">
                 <div className="w-2/4 rounded overflow-hidden shadow-lg bg-slate-50 mb-3">
-                    <div className="px-6 py-4">
-                        <div> Student Last Task: {studentTask && studentTask['id']} </div>
+                    <div className="px-6 py-4 flex justify-center items-center">
+                        <div className="w-52 shadow-lg bg-slate-50 mb-3 p-3">
+                            <h1 className="text-xl font-semibold"> Student Last Task</h1>
+                            <div className="p-0.5"> ID: {studentTask && studentTask['id']} </div>
+                            <div className="p-0.5"> Correct Answers: {dataTask && dataTask['correct']} </div>
+                            <div className="p-0.5"> Incorrect Answers: {dataTask && dataTask['incorrect']} </div>
+                            <div className="p-0.5"> Total score: {dataTask && dataTask['correct']}/{dataTask && dataTask['number_of_questions']} </div>
+                            <div className="p-0.5"> Score percentage: {dataTask && (dataTask['correct']/dataTask['number_of_questions'])*100}% </div>
+                        </div>
                     </div>
                     <div className="flex mb-3">
                         <div className="w-52"></div>

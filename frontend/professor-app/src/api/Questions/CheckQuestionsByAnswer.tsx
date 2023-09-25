@@ -87,7 +87,7 @@ function CheckQuestionsByAns() {
                 }
                 questionFreqArray.push(questionFreq)
             }
-            console.log("Incorrect frequency per question:",questionFreqArray)
+            // console.log("Incorrect frequency per question:",questionFreqArray)
 
             for (let i=0; i<questionFreqArray.length; i++) {
                 if (questionFreqArray[i].frequency > 0) {
@@ -110,7 +110,7 @@ function CheckQuestionsByAns() {
                             typesAndFreq[5]['frequency'] += questionFreqArray[i].frequency
                         }
 
-                    console.log("types and freq", typesAndFreq)
+                    // console.log("types and freq", typesAndFreq)
                 }
             }
         }
