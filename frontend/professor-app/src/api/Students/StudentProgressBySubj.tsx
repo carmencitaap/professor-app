@@ -1,12 +1,124 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarList, Card, Title, Bold, Flex, Text } from "@tremor/react";
+import { useParams } from 'react-router-dom';
 
+const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
+const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/';
 
 function StudentProgress() {
+    const [questions, setQuestions] = useState([]);
+    const [student, setStudent] = useState([]);
+
+    const { studentId } = useParams();
+  
+    useEffect (() => {
+        fetch(`${STUDENT_ENDPOINT}${studentId}/`)
+        .then((response) => response.json())
+        .then(data => {
+            console.log("Student:",data);
+            setStudent(data)
+          })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    }, [studentId])
+
+    useEffect (() => {
+        fetch(QUESTION_ENDPOINT)
+        .then((response) => response.json())
+        .then(data => {
+            console.log("Questions:",data);
+            setQuestions(data);
+            })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    }, [])
+
+    useEffect (() => {
+        if (student && questions.length > 0) {
+            calculateFrequencies(questions,student);
+        }
+    }, [student, questions])
+
+
+    const calculateFrequencies = (questions: any, student: any) => {
+        const questionFreqArray = []
+        const typesAndFreq = [
+            {
+                subject: "Resistencias en serie y paralelo",
+                frequency: 0,
+            },
+            {
+                subject: "Kirchhoff - suma tensiones",
+                frequency: 0,
+            },
+            {
+                subject: "Kirchhoff - suma corrientes",
+                frequency: 0,
+            },
+            {
+                subject: "Tipos de condensadores",
+                frequency: 0,
+            },
+            {
+                subject: "Energía de un condensador",
+                frequency: 0,
+            },
+            {
+                subject: "Carga de un condensador",
+                frequency: 0,
+            }
+        ]
+
+        if (questions && student) {
+            for (let i=0; i<questions.length; i++) {
+                const questionFreq = {
+                    question_id: questions[i].id,
+                    frequency: 0,
+                    subject: questions[i].type_subject
+                }
+                for (let k=0; k<student.correctly_answered_questions.length; k++) {
+                        if (student.correctly_answered_questions[k] === questions[i].id) {
+                            questionFreq.frequency += 1
+                        }
+                      }
+                questionFreqArray.push(questionFreq)
+            }
+            console.log("Incorrect frequency per question:",questionFreqArray)
+
+            for (let i=0; i<questionFreqArray.length; i++) {
+                if (questionFreqArray[i].frequency > 0) {
+                        if (questionFreqArray[i].subject === "Resistencias en serie y paralelo") {
+                            typesAndFreq[0]['frequency'] += questionFreqArray[i].frequency
+                        }
+                        else if (questionFreqArray[i].subject === "Kirchhoff - suma tensiones") {
+                            typesAndFreq[1]['frequency'] += questionFreqArray[i].frequency
+                        }
+                        else if (questionFreqArray[i].subject === "Kirchhoff - suma corrientes") {
+                            typesAndFreq[2]['frequency'] += questionFreqArray[i].frequency
+                        }
+                        else if (questionFreqArray[i].subject === "Tipos de condensadores") {
+                            typesAndFreq[3]['frequency'] += questionFreqArray[i].frequency
+                        }
+                        else if (questionFreqArray[i].subject === "Energía de un condensador") {
+                            typesAndFreq[4]['frequency'] += questionFreqArray[i].frequency
+                        }
+                        else if (questionFreqArray[i].subject === "Carga de un condensador") {
+                            typesAndFreq[5]['frequency'] += questionFreqArray[i].frequency
+                        }
+
+                    console.log("types and freq", typesAndFreq)
+                }
+            }
+        }
+       return typesAndFreq;
+    }
+
     const data = [
         {
           name: "Resistencias en serie y paralelo",
-          value: 500,
+          value: calculateFrequencies(questions,student)[0].frequency,
           
 
           icon: function ResistanceIcon() {
@@ -28,7 +140,7 @@ function StudentProgress() {
         },
         {
           name: "Kirchhoff - suma tensiones",
-          value: 351,
+          value: calculateFrequencies(questions,student)[1].frequency,
 
           icon: function BoltIcon() {
             return (
@@ -41,7 +153,7 @@ function StudentProgress() {
         },
         {
           name: "Kirchhoff - suma corrientes",
-          value: 271,
+          value: calculateFrequencies(questions,student)[2].frequency,
 
           icon: function BoltIcon() {
             return (
@@ -54,7 +166,7 @@ function StudentProgress() {
         },
         {
           name: "Tipos de condensadores",
-          value: 191,
+          value: calculateFrequencies(questions,student)[3].frequency,
 
           icon: function CondensatorIcon() {
             return (
@@ -73,7 +185,7 @@ function StudentProgress() {
         },
         {
           name: "Energía de un condensador",
-          value: 91,
+          value: calculateFrequencies(questions,student)[4].frequency,
 
           icon: function CondensatorIcon() {
             return (
@@ -132,7 +244,7 @@ function StudentProgress() {
         },
         {
             name: "Carga de un condensador",
-            value: 91,
+            value: calculateFrequencies(questions,student)[5].frequency,
   
             icon: function BatteryIcon() {
               return (
@@ -147,13 +259,13 @@ function StudentProgress() {
     return (
         <div>
             <Card className="w-96">
-                <Title> Avance por tema </Title>
+                <Title> Progress by subject </Title>
                 <Flex className="mt-4">
                 <Text>
-                    <Bold> Tema </Bold>
+                    <Bold> Subject </Bold>
                 </Text>
                 <Text>
-                    <Bold> Porcentaje </Bold>
+                    <Bold> Correct Answers </Bold>
                 </Text>
                 </Flex>
                 <BarList data={data} className="mt-2" />
