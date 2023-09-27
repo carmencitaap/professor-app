@@ -1,3 +1,4 @@
+import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import React, { useState, useEffect, useCallback } from 'react';
 
 const ALTERNATIVE_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternative/"
@@ -25,6 +26,20 @@ function GetAlternatives(props: any) {
         fetchAlternatives()
     }, [fetchAlternatives])
 
+    const deleteAlternative = (alternative_id: any) => {
+        fetch(`${ALTERNATIVE_ENDPOINT}${alternative_id}/`, {
+            method: "DELETE"
+        })
+        .then((response) => {
+            if (response.status === 204) {
+                setAlternatives(alternatives.filter((alternative: any) => alternative.id !== alternative_id))
+            }
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    }
+
     
     return (
         <div>
@@ -39,12 +54,29 @@ function GetAlternatives(props: any) {
 
                 
                 <h1 className="text-3xl font-bold py-2 pb-2">Alternatives for question #{props.questionId}</h1>
-                <div>
-                {alternatives.map((alt: any) => (
-                    <div key={alt.id}>
-                        <p className="text-lg font-semibold">{alt.answer} {alt.is_correct ? "Correct Answer" : "Incorrect Answer"}</p>
-                    </div>
-                ))}
+                <div className="flex justify-center items-center">
+                    <table className="w-full text-sm text-left text-gray-800 dark:text-gray-400 mt-3 mb-3">
+                        <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                            <tr>
+                                <th className="px-6 py-4 text-lg"> Answer </th>
+                                <th className="px-6 py-4 text-lg"> Correct </th>
+                                <th className="px-6 py-4 text-lg"> Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {alternatives.map((alt: any) => (
+                                <tr key={alt.id}>
+                                    <td className="text-lg font-semibold">{alt.answer}</td>
+                                    <td>  {alt.is_correct ? "Correct Answer" : "Incorrect Answer"} </td>
+
+                                    <td className="flex">
+                                        <button> <PencilIcon className="h-6 w-6 text gray-400 mt-3 mr-2 ml-6"/> </button>
+                                        <button onClick={() => deleteAlternative(alt.id)}> <TrashIcon className="h-6 w-6 text-red-600 mt-3"/> </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
                 
