@@ -1,10 +1,13 @@
-import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
+import { CheckIcon, PencilIcon, PlusSmIcon, TrashIcon, XIcon } from '@heroicons/react/solid';
 import React, { useState, useEffect, useCallback } from 'react';
+import CreateAlternatives from './NewAlternatives';
 
 const ALTERNATIVE_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternative/"
 
 function GetAlternatives(props: any) {
     const [alternatives, setAlternatives] = useState([]);
+    const [altModalOpen, setAltModalOpen] = useState(false);
+
     console.log("altq qqqqqqqqqq", props.questionId)
 
     const fetchAlternatives = useCallback(() => {
@@ -39,7 +42,15 @@ function GetAlternatives(props: any) {
             console.log(err.message)
         })
     }
+    
+    const openAltModal = (question_id: any) => {
+        setAltModalOpen(true);
+        // setSelectedQuestion(question_id)
+    }
 
+    const closeAltModal = () => {
+        setAltModalOpen(false);
+    }
     
     return (
         <div>
@@ -67,10 +78,15 @@ function GetAlternatives(props: any) {
                             {alternatives.map((alt: any) => (
                                 <tr key={alt.id}>
                                     <td className="text-lg font-semibold">{alt.answer}</td>
-                                    <td>  {alt.is_correct ? "Correct Answer" : "Incorrect Answer"} </td>
+                                    <td>  {alt.is_correct ?
+                                        <CheckIcon className="h-4 w-4 text-green-500 ml-12"/>
+                                    :
+                                        <XIcon className="h-4 w-4 text-red-600 ml-12"/>}
+                                    </td>
 
                                     <td className="flex">
-                                        <button> <PencilIcon className="h-6 w-6 text gray-400 mt-3 mr-2 ml-6"/> </button>
+                                        <button> <PlusSmIcon onClick={() => {openAltModal(props.aq)}} className="h-7 w-7 mt-1 ml-3 mr-2 mt-3"/> </button>
+                                        <button> <PencilIcon className="h-6 w-6 text gray-400 mt-3 mr-2"/> </button>
                                         <button onClick={() => deleteAlternative(alt.id)}> <TrashIcon className="h-6 w-6 text-red-600 mt-3"/> </button>
                                     </td>
                                 </tr>
@@ -78,6 +94,18 @@ function GetAlternatives(props: any) {
                         </tbody>
                     </table>
                 </div>
+
+                 
+                {altModalOpen && (
+                    <div className="modal-container">
+                        <div className="flex">
+                             <div>
+                                <CreateAlternatives questionId={props.questionId} closeAltModal={closeAltModal}/>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                
             </div>
                 
         </div>
