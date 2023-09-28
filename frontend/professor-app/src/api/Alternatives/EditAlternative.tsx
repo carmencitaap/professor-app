@@ -1,13 +1,54 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
+const ALTERNATIVE_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternative/"
 
 function EditAlternative(props: any) {
     const [isChecked, setIsChecked] = useState(false);
     const [alternative, setAlternative] = useState("");
-    console.log("alternativeee", props.alternative)
-
 
     const handleOnChange = () => {
         setIsChecked(!isChecked);
+    }
+
+    const fetchAlternative = useCallback(() => {
+        fetch(`${ALTERNATIVE_ENDPOINT}${props.alternative_id}/`)
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+            setAlternative(data['answer'])
+            setIsChecked(data['is_correct'])
+        })
+        .catch((err) => {
+            console.log(err.message)
+        })
+    }, [props.alternative_id])
+
+    useEffect(() => {
+        fetchAlternative();
+    }, [fetchAlternative])
+
+    const editAlternative = () => {
+        fetch(`${ALTERNATIVE_ENDPOINT}${props.alternative_id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                answer: alternative,
+                is_correct: isChecked,
+                alternative_question: props.aq
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            console.log("Alternative edited")
+            props.getAlternatives();
+            props.closeEditModal();
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
     }
     
     return (
@@ -34,6 +75,7 @@ function EditAlternative(props: any) {
                         className="bg-gray-50 appearance-none border border-gray-300 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 shadow-lg"
                         id="alternative"
                         type="text"
+                        value={alternative}
                         onChange={(e) => setAlternative(e.target.value)}/>
                     </div>
                 </div>
@@ -57,11 +99,11 @@ function EditAlternative(props: any) {
                     </div>
                 </div>
 
-                <button className="shadow button-pink focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+                <button onClick={editAlternative} className="shadow button-pink focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
                     Save alternative
                 </button>
             </form>
-            <button> Cancel </button>
+            <button className="text-blue-800 underline mt-1 mb-1 mr-10 ml-10"> Cancel </button>
         </div>
     )
 }
