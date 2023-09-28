@@ -18,6 +18,10 @@ function EditQuestion(props: any) {
         .then(data => {
             console.log(data);
             setQuestion(data)
+            setTitle(data['question'])
+            setSubject(data['type_subject'])
+            setDifficulty(data['difficulty'])
+            setHint(data['hint'])
         })
         .catch((err) => {
             console.log(err.message)
@@ -27,6 +31,31 @@ function EditQuestion(props: any) {
     useEffect(() => {
         fetchQuestion();
     }, [fetchQuestion])
+
+    const editQuestion = () => {
+        fetch(`${QUESTION_ENDPOINT}${props.questionId}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                question: title,
+                type_question: "AQ",
+                type_subject: subject,
+                difficulty: difficulty,
+                hint: hint
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            console.log("Question edited")
+            props.closeEditModal();
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
+    }
 
 
     return (
@@ -55,6 +84,7 @@ function EditQuestion(props: any) {
                             className="bg-gray-50 appearance-none border border-gray-300 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 shadow-lg"
                             id="question-title"
                             type="text"
+                            value={title}
                             onChange={(e) => setTitle(e.target.value)}/>
                         </div>
                     </div>
@@ -70,6 +100,7 @@ function EditQuestion(props: any) {
                             <select
                             id="subject"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 shadow-lg"
+                            value={subject}
                             onChange={(e) => setSubject(e.target.value)}>
                                 <option value="">Choose a subject</option>
                                 <option value="Resistencias en serie y paralelo">Resistencias serie y paralelo</option>
@@ -93,6 +124,7 @@ function EditQuestion(props: any) {
                             <select
                             id="difficulty"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 shadow-lg"
+                            value={difficulty}
                             onChange={(e) => setDifficulty(e.target.value)}>
                                 <option value="">Choose difficulty</option>
                                 <option value="Easy">Easy</option>
@@ -114,6 +146,7 @@ function EditQuestion(props: any) {
                             <textarea
                             className="bg-gray-50 appearance-none border border-gray-300 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 shadow-lg"
                             id="hint"
+                            value={hint}
                             onChange={(e) => setHint(e.target.value)}/>
                         </div>
                     </div>
@@ -121,14 +154,14 @@ function EditQuestion(props: any) {
                     <div className="md:flex md:items-center">
                         <div className="md:w-16"></div>
                         <div className="flex flex-col">
-                            <button className="shadow button-pink focus:shadow-outline focus:outline-none text-white font-bold py-2 px-2 rounded mr-10" type="button">
+                            <button onClick={() => editQuestion()} className="shadow button-pink focus:shadow-outline focus:outline-none text-white font-bold py-2 px-2 rounded mr-10" type="button">
                                 Save Question
                             </button>
                         </div>
                     </div>
                 </form>
                 
-                <button onClick={props.closeEditModal} className="text-blue-800 underline mt-1 mb-1 mr-10"> 
+                <button onClick={props.closeEditModal} className="text-blue-800 underline mt-1 mb-1 mr-10 ml-10"> 
                     Cancel
                 </button>
             </div>
