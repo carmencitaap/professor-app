@@ -1,12 +1,15 @@
 import { CheckIcon, PencilIcon, PlusSmIcon, TrashIcon, XIcon } from '@heroicons/react/solid';
 import React, { useState, useEffect, useCallback } from 'react';
 import CreateAlternatives from './NewAlternatives';
+import EditAlternative from './EditAlternative';
 
 const ALTERNATIVE_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternative/"
 
 function GetAlternatives(props: any) {
     const [alternatives, setAlternatives] = useState([]);
     const [altModalOpen, setAltModalOpen] = useState(false);
+    const [editAltModalOpen, setEditAltModalOpen] = useState(false);
+    const [selectedAlternative, setSelectedAlternative] = useState(null);
 
     console.log("altq qqqqqqqqqq", props.questionId)
 
@@ -51,6 +54,15 @@ function GetAlternatives(props: any) {
     const closeAltModal = () => {
         setAltModalOpen(false);
     }
+
+    const openEditModal = (alternative_id) => {
+        setEditAltModalOpen(true);
+        setSelectedAlternative(alternative_id)
+    }
+
+    const closeEditModal = () => {
+        setEditAltModalOpen(false);
+    }
     
     return (
         <div>
@@ -86,7 +98,7 @@ function GetAlternatives(props: any) {
 
                                     <td className="flex">
                                         <button> <PlusSmIcon onClick={() => {openAltModal(props.aq)}} className="h-7 w-7 mt-1 ml-3 mr-2 mt-3"/> </button>
-                                        <button> <PencilIcon className="h-6 w-6 text gray-400 mt-3 mr-2"/> </button>
+                                        <button> <PencilIcon onClick={() => {openEditModal(alt.id)}} className="h-6 w-6 text gray-400 mt-3 mr-2"/> </button>
                                         <button onClick={() => deleteAlternative(alt.id)}> <TrashIcon className="h-6 w-6 text-red-600 mt-3"/> </button>
                                     </td>
                                 </tr>
@@ -96,11 +108,11 @@ function GetAlternatives(props: any) {
                 </div>
 
                  
-                {altModalOpen && (
+                {editAltModalOpen && (
                     <div className="modal-container">
                         <div className="flex">
                              <div>
-                                <CreateAlternatives questionId={props.questionId} closeAltModal={closeAltModal}/>
+                                <EditAlternative closeEditModal={closeEditModal} alternative={selectedAlternative} aq={props.questionId}/>
                             </div>
                         </div>
                     </div>

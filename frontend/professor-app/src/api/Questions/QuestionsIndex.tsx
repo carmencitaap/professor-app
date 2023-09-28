@@ -6,6 +6,7 @@ import { TrashIcon, PencilIcon, PlusSmIcon } from '@heroicons/react/solid';
 import CreateAQ from '../Alternatives/NewAlternativeQuestion';
 import CreateAlternatives from '../Alternatives/NewAlternatives';
 import GetAlternatives from '../Alternatives/AlternativesIndex';
+import EditQuestion from './EditQuestion';
 
 
 const QUESTION_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/"
@@ -18,6 +19,8 @@ function AlternativeQuestionsIndex() {
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [alternativeQuestions, setAlternativeQuestions] = useState([]);
     const [altsModal, setAltsModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
     const [AQ, setAQ] = useState(null);
 
     const fetchQuestions = useCallback(() => {
@@ -35,10 +38,6 @@ function AlternativeQuestionsIndex() {
     useEffect (() => {
         fetchQuestions()
     }, [fetchQuestions])
-
-    const editQuestion = () => {
-
-    }
 
     const deleteQuestion = (question_id: any) => {
         fetch(`${QUESTION_ENDPOINT}${question_id}/`, {
@@ -78,15 +77,7 @@ function AlternativeQuestionsIndex() {
         }
     }, [selectedQuestion, alternativeQuestions, AQ])
 
-    const openAltModal = (question_id: any) => {
-        setAltModalOpen(true);
-        setSelectedQuestion(question_id)
-    }
 
-
-    const closeAltModal = () => {
-        setAltModalOpen(false);
-    }
 
     const fetchAQs = useCallback(() => {
         fetch(ALTERNATIVEQ_ENDPOINT)
@@ -115,6 +106,14 @@ function AlternativeQuestionsIndex() {
     }
 
 
+    const openEditModal = (question_id: any) => {
+        setSelectedQuestion(question_id)
+        setShowEditModal(true);
+    }
+
+    const closeEditModal = () => {
+        setShowEditModal(false);
+    }
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -140,7 +139,6 @@ function AlternativeQuestionsIndex() {
                             <th className="px-6 py-4 text-lg"> Subject </th>
                             <th className="px-6 py-4 text-lg"> Difficulty </th>
                             <th className="px-6 py-4 text-lg"> Alts </th>
-                            <th className="px-6 py-4 text-lg"> Add alternative </th>
                             <th className="px-6 py-4 text-lg"> Actions </th>
                         </tr>
                     </thead>
@@ -155,11 +153,8 @@ function AlternativeQuestionsIndex() {
                             <td>
                                 <button onClick={()=>{openPopup(question.id)}} className="bg-transparent button-pink font-semibold hover:text-white py-1.5 px-2 border border-violet-400 hover:border-transparent rounded mb-1.5 mt-1"> See alternatives </button>
                             </td>
-                            <td>
-                                <button> <PlusSmIcon onClick={() => {openAltModal(question.id)}} className="h-7 w-7 mt-1 ml-16"/> </button>
-                            </td>
                             <td className="flex">
-                                <PencilIcon onClick={editQuestion} className="h-7 w-7 text gray-400 mt-3 mr-5"/>
+                                <button> <PencilIcon onClick={() => openEditModal(question.id)} className="h-7 w-7 text gray-400 mt-3 mr-5"/> </button>
                                 <button> <TrashIcon onClick={() => deleteQuestion(question.id)} className="h-7 w-7 text-red-600 mt-3"/> </button>
                             </td>
                         </tr>
@@ -167,24 +162,21 @@ function AlternativeQuestionsIndex() {
                     </tbody>
                 </table>
 
-                
-                {altModalOpen && (
-                    <div className="modal-container">
-                        <div className="flex">
-                            {AQ && (
-                                <div>
-                                    <CreateAlternatives questionId={AQ} closeAltModal={closeAltModal}/>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )}
+               
 
                 {altsModal && (
                     <div className="modal-container">
                         <div className="flex">
                             <GetAlternatives questionId={AQ} closePopup={closePopup}/>
                         </div>
+                    </div>
+                )}
+
+                {showEditModal && (
+                    <div className="modal-container">
+                            <div className="flex">
+                                <EditQuestion questionId={selectedQuestion} closeEditModal={closeEditModal} aq={AQ}/>
+                            </div>
                     </div>
                 )}
             </div>
