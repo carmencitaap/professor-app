@@ -88,18 +88,18 @@ function GetAlternatives(props: any) {
                         </thead>
                         <tbody>
                             {alternatives.map((alt: any) => (
-                                <tr key={alt.id}>
-                                    <td className="text-lg font-semibold">{alt.answer}</td>
+                                <tr  className="border-b bg-neutral-50 hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={alt.id}>
+                                    <td className="whitespace-nowrap px-3 py-2 font-medium">{alt.answer}</td>
                                     <td>  {alt.is_correct ?
                                         <CheckIcon className="h-4 w-4 text-green-500 ml-12"/>
                                     :
                                         <XIcon className="h-4 w-4 text-red-600 ml-12"/>}
                                     </td>
 
-                                    <td className="flex">
-                                        <button> <PlusSmIcon onClick={() => {openAltModal(props.aq)}} className="h-7 w-7 mt-1 ml-3 mr-2 mt-3"/> </button>
-                                        <button> <PencilIcon onClick={() => {openEditModal(alt.id)}} className="h-6 w-6 text gray-400 mt-3 mr-2"/> </button>
-                                        <button onClick={() => deleteAlternative(alt.id)}> <TrashIcon className="h-6 w-6 text-red-600 mt-3"/> </button>
+                                    <td className="flex mt-1 mb-1">
+                                        <button> <PlusSmIcon onClick={() => {openAltModal(props.aq)}} className="h-7 w-7 ml-2"/> </button>
+                                        <button> <PencilIcon onClick={() => {openEditModal(alt.id)}} className="h-5 w-5 text gray-400 ml-2"/> </button>
+                                        <button onClick={() => deleteAlternative(alt.id)}> <TrashIcon className="h-5 w-5 text-red-600 ml-2"/> </button>
                                     </td>
                                 </tr>
                             ))}

@@ -69,7 +69,7 @@ function EditQuestion(props: any) {
                     </button>
                 </div>
 
-                <h1 className="text-2xl font-semibold mb-5"> Creating an Alternative Question </h1>
+                <h1 className="text-2xl font-semibold mb-5 px-10"> Editing question #{question['id']} </h1>
                 <form className="w-full max-w-sm flex flex-col justify-center items-center">
                     {/* Título pregunta */}
                     <div className="md:flex md:items-center mb-6">
