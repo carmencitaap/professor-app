@@ -48,7 +48,7 @@ function GetStudent() {
         fetchTasks();
     }, [fetchTasks])
 
-    const funcSetStudentTask = () => {
+    const funcSetStudentTask = useCallback(() => {
         if (tasks) {
             for (let i = 0; i < tasks.length; i++) {
                 if (tasks[i].student === student['id']) {      
@@ -59,23 +59,17 @@ function GetStudent() {
                 }
             }
         }
-    }
+    },[])
     
     useEffect(() => {
         funcSetStudentTask();
-    }, [tasks, student])
+    }, [tasks, student,funcSetStudentTask])
 
     const handleGoBack = () => {
         window.location.replace('/studentsindex');
     }
 
-    useEffect(() => {
-        if (studentTask && taskQuestions) {
-            getCorrectAndIncorrectByTask()
-        }
-    }, [studentTask,taskQuestions])
-
-    const getCorrectAndIncorrectByTask = () => {
+    const getCorrectAndIncorrectByTask = useCallback(() => {
         console.log("student Task", studentTask);
         console.log("task questions", taskQuestions);
 
@@ -102,6 +96,13 @@ function GetStudent() {
         }
 
     }
+    , [studentTask, taskQuestions, student])
+
+    useEffect(() => {
+        if (studentTask && taskQuestions) {
+            getCorrectAndIncorrectByTask()
+        }
+    }, [studentTask,taskQuestions, getCorrectAndIncorrectByTask])
 
     return (
         <div>
