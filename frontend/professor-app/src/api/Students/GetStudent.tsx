@@ -59,7 +59,7 @@ function GetStudent() {
                 }
             }
         }
-    },[])
+    },[students,tasks])
     
     useEffect(() => {
         funcSetStudentTask();
