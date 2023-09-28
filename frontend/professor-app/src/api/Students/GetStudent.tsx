@@ -13,6 +13,7 @@ function GetStudent() {
     const [studentTask, setStudentTask] = useState();
     const [taskQuestions, setTaskQuestions] = useState([]);
     const [dataTask, setDataTask] = useState({});
+    const [studentTasks, setStudentTasks] = useState([]);
     const { studentId } = useParams();
 
     const fetchStudent = useCallback(() => {
@@ -51,7 +52,8 @@ function GetStudent() {
         if (tasks) {
             for (let i = 0; i < tasks.length; i++) {
                 if (tasks[i].student === student['id']) {      
-                    console.log("SIUUU ")     
+                    console.log("SIUUU ")
+                    console.log("tasks",tasks[i]) 
                     setStudentTask(tasks[i]);
                     setTaskQuestions(tasks[i].questions)
                 }
@@ -101,21 +103,38 @@ function GetStudent() {
 
     }
 
-
     return (
         <div>
             <div className='text-2xl font-semibold py-3'> Stats for {student['username']} </div>
             
             <div className="flex justify-center items-center">
                 <div className="w-2/4 rounded overflow-hidden shadow-lg bg-slate-50 mb-3">
+                    <div className="flex justify-center items-center"> 
+                        <div className="w-48 rounded overflow-hidden shadow-lg bg-slate-50 mt-3">
+                            <h1 className="text-xl font-semibold p-1"> Last login </h1> 
+                            <div>
+                                Day: {student['last_login'] && student['last_login'].split('T')[0]}
+                            </div>
+                            <div>
+                                Time: {student['last_login'] && student['last_login'].split('T')[1].split('.')[0]}
+                            </div>
+                        </div>
+                    </div>
                     <div className="px-6 py-4 flex justify-center items-center">
                         <div className="w-52 shadow-lg bg-slate-50 mb-3 p-3">
                             <h1 className="text-xl font-semibold"> Student Last Task</h1>
-                            <div className="p-0.5"> ID: {studentTask && studentTask['id']} </div>
-                            <div className="p-0.5"> Correct Answers: {dataTask && dataTask['correct']} </div>
-                            <div className="p-0.5"> Incorrect Answers: {dataTask && dataTask['incorrect']} </div>
-                            <div className="p-0.5"> Total score: {dataTask && dataTask['correct']}/{dataTask && dataTask['number_of_questions']} </div>
-                            <div className="p-0.5"> Score percentage: {dataTask && (dataTask['correct']/dataTask['number_of_questions'])*100}% </div>
+                            {(studentTask && studentTask['type_task'] === "AQ" && (
+                                <div>
+                                    <div className="p-0.5"> ID: {studentTask && studentTask['id']} </div>
+                                    <div className="p-0.5"> Correct Answers: {dataTask && dataTask['correct']} </div>
+                                    <div className="p-0.5"> Incorrect Answers: {dataTask && dataTask['incorrect']} </div>
+                                    <div className="p-0.5"> Total score: {dataTask && dataTask['correct']}/{dataTask && dataTask['number_of_questions']} </div>
+                                    <div className="p-0.5"> Score percentage: {dataTask && (dataTask['correct']/dataTask['number_of_questions'])*100}% </div>
+                                </div>
+                                ))}
+                            {/* {(studentTask && studentTask['type_task'] === "N" && (
+
+                                ))} */}
                         </div>
                     </div>
                     <div className="flex mb-3">
