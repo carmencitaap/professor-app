@@ -23,9 +23,9 @@ function StudentsAndProgress() {
     useEffect (() => {
         const levelss = [0,0,0,0,0,0,0,0,0,0]
 
-        students.map((student: any) => {
+        students.map((student: any) => (
             levelss[student.level-1] += 1
-        })
+        ))
         setLevels(levelss)
     }, [students])
 

@@ -39,6 +39,7 @@ function CreateAQ(props: any) {
             console.log("Question created successfully.")
             console.log(data)
             setQuestionCreated(data);
+            console.log(questionCreated)
             createAQ(data.id);
 
             props.closeModal();
@@ -63,6 +64,7 @@ function CreateAQ(props: any) {
             console.log("Alternative Question created successfully.")
             console.log(data)
             setAQCreated(data);
+            console.log(AQCreated)
         })
         .catch(error => console.log(error))
     }

@@ -1,4 +1,4 @@
-import { CheckIcon, PencilIcon, PlusSmIcon, TrashIcon, XIcon } from '@heroicons/react/solid';
+import { CheckIcon, PencilIcon, TrashIcon, XIcon } from '@heroicons/react/solid';
 import React, { useState, useEffect, useCallback } from 'react';
 import CreateAlternatives from './NewAlternatives';
 import EditAlternative from './EditAlternative';

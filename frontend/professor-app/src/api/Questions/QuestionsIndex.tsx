@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { TrashIcon, PencilIcon, PlusSmIcon } from '@heroicons/react/solid';
+import { TrashIcon, PencilIcon } from '@heroicons/react/solid';
 
 
 import CreateAQ from '../Alternatives/NewAlternativeQuestion';
-import CreateAlternatives from '../Alternatives/NewAlternatives';
 import GetAlternatives from '../Alternatives/AlternativesIndex';
 import EditQuestion from './EditQuestion';
 
@@ -15,7 +14,6 @@ const ALTERNATIVEQ_ENDPOINT = "https://pds-p2-g5-avendano-brito-guerriero.vercel
 function AlternativeQuestionsIndex() {
     const [questions, setQuestions] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [altModalOpen, setAltModalOpen] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [alternativeQuestions, setAlternativeQuestions] = useState([]);
     const [altsModal, setAltsModal] = useState(false);

@@ -13,7 +13,7 @@ function GetStudent() {
     const [studentTask, setStudentTask] = useState();
     const [taskQuestions, setTaskQuestions] = useState([]);
     const [dataTask, setDataTask] = useState({});
-    const [studentTasks, setStudentTasks] = useState([]);
+    // const [studentTasks, setStudentTasks] = useState([]);
     const { studentId } = useParams();
 
     const fetchStudent = useCallback(() => {

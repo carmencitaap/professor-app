@@ -52,18 +52,32 @@ function GetBestTask() {
         fetchStudents();
     }, [fetchStudents]);
 
-    const userTask = [];
-    const data = {
-        task: 0,
-        user_id: 0
-    }
+    // const userTask = [];
+    // const data = {
+    //     task: 0,
+    //     user_id: 0
+    // }
 
 
 
 
     return (
         <div>
-            <h1>GetBestTask</h1>
+            <div>
+                {tasks.map((task: any) => (
+                    <div>
+                        <h1>{task.name}</h1>
+                    </div>
+                ))}
+            </div>
+
+            <div>
+                {students.map((student: any) => (
+                    <div>
+                        <h1>{student.name}</h1>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
