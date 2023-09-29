@@ -79,8 +79,8 @@ function GetAlternatives(props: any) {
                 <button onClick={() => {openAltModal(props.aq)}} > + Add alternative </button>
                 <h1 className="text-3xl font-bold py-2 pb-2">Alternatives for question #{props.questionId}</h1>
                 <div className="flex justify-center items-center">
-                    <table className="w-full text-sm text-left text-gray-800 dark:text-gray-400 mt-3 mb-3">
-                        <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                    <table className="w-full text-sm text-left text-gray-800 mt-3 mb-3">
+                        <thead className="border-b bg-white font-medium">
                             <tr>
                                 <th className="px-6 py-4 text-lg"> Answer </th>
                                 <th className="px-6 py-4 text-lg"> Correct </th>
@@ -89,7 +89,7 @@ function GetAlternatives(props: any) {
                         </thead>
                         <tbody>
                             {alternatives.map((alt: any) => (
-                                <tr  className="border-b bg-neutral-50 hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={alt.id}>
+                                <tr  className="border-b bg-neutral-50 hover:bg-neutral-100" key={alt.id}>
                                     <td className="whitespace-nowrap px-3 py-2 font-medium">{alt.answer}</td>
                                     <td>  {alt.is_correct ?
                                         <CheckIcon className="h-4 w-4 text-green-500 ml-12"/>

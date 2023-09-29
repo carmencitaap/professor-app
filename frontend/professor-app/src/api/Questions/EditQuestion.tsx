@@ -99,7 +99,7 @@ function EditQuestion(props: any) {
                         <div className="md:w-2/3">
                             <select
                             id="subject"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 shadow-lg"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 shadow-lg"
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}>
                                 <option value="">Choose a subject</option>
@@ -123,7 +123,7 @@ function EditQuestion(props: any) {
                         <div className="md:w-2/3">
                             <select
                             id="difficulty"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-500 dark:focus:border-purple-500 shadow-lg"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 shadow-lg"
                             value={difficulty}
                             onChange={(e) => setDifficulty(e.target.value)}>
                                 <option value="">Choose difficulty</option>

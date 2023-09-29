@@ -128,8 +128,8 @@ function AlternativeQuestionsIndex() {
                     )}
                     
                     </div>
-                <table className="w-full text-sm text-left text-gray-800 dark:text-gray-400 mt-3 mb-3">
-                    <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                <table className="w-full text-sm text-left text-gray-800 mt-3 mb-3">
+                    <thead className="border-b bg-white font-medium">
                         <tr>
                             <th className="px-6 py-4 text-lg"> Number </th>
                             <th className="px-6 py-4 text-lg"> Question </th>
@@ -142,7 +142,7 @@ function AlternativeQuestionsIndex() {
                     </thead>
                     <tbody>
                     {questions.map((question: any) => (
-                        <tr key={question.id} className="border-b bg-neutral-50 hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+                        <tr key={question.id} className="border-b bg-neutral-50 hover:bg-neutral-100">
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{question.id}</td>
                             <td className="whitespace-nowrap px-6 py-4">{question.question}</td>
                             <td className="whitespace-nowrap px-6 py-4">{question.type_question}</td>

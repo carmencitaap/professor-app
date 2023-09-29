@@ -50,8 +50,8 @@ function StudentsAndProgress() {
                     <div className="flex">
                         {/* Table for showing students and its levels and xp */}
                         <div className="mr-10">
-                        <table className="w-1/4 text-sm text-left text-gray-800 dark:text-gray-400 mt-3 mb-3">
-                            <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                        <table className="w-1/4 text-sm text-left text-gray-800 mt-3 mb-3">
+                            <thead className="border-b bg-white font-medium">
                                 <tr>
                                     <th className="px-1 py-1 text-sm"> Student </th>
                                     <th> Level </th>
@@ -60,7 +60,7 @@ function StudentsAndProgress() {
                             </thead>
                             <tbody>
                                 {students.map((student: any) => (
-                                    <tr key={student.id} className="border-b hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+                                    <tr key={student.id} className="border-b hover:bg-neutral-100">
                                         <td className="whitespace-nowrap px-2 py-4"> {student.username} </td>
                                         <td className="whitespace-nowrap px-2 py-4"> Level {student.level} </td>
                                         <td className="whitespace-nowrap px-2 py-4"> {student.xp} </td>
