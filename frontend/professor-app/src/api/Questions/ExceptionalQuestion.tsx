@@ -59,7 +59,9 @@ function ExceptionalQuestion() {
 
             // setMostCorrectly(sortedCorrect[0][0])
             console.log("jdkfldkjf",sortedIncorrect)
-            setMostIncorrectly(sortedIncorrect[0][0])
+            if (sortedIncorrect.length > 0 ) {
+                setMostIncorrectly(sortedIncorrect[0][0])
+            }
         }
         }, [students])
     
