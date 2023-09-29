@@ -101,8 +101,8 @@ function StudentsAndProgress() {
                 <Card className="w-2/4 mb-16">
                     <Title> Use time in tasks </Title>
                     <Subtitle> Total time and average </Subtitle>
-                    <table className="w-2/4 text-sm text-left text-gray-800 dark:text-gray-400 mt-3 mb-3 ml-3">
-                        <thead className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                    <table className="w-2/4 text-sm text-left text-gray-800 mt-3 mb-3 ml-3">
+                        <thead className="border-b bg-white font-medium">
                             <tr>
                                 <th className="px-1 py-1 text-sm"> Student </th>
                                 <th className="px-1 py-1 text-sm"> Time in task </th>
@@ -111,7 +111,7 @@ function StudentsAndProgress() {
                         </thead>
                         <tbody>
                             {students.map((student: any) => (
-                                <tr key={student.id} className="border-b hover:bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
+                                <tr key={student.id} className="border-b hover:bg-neutral-100">
                                     <td className="whitespace-nowrap px-2 py-4"> {student.username} </td>
                                     <td className="whitespace-nowrap px-2 py-4"> {student.time_connected.split('.')[0]} </td>
                                     <td className="whitespace-nowrap px-2 py-4">
