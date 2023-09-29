@@ -30,7 +30,8 @@ function CreateAQ(props: any) {
                 question: title,
                 type_question: "AQ",
                 type_subject: subject,
-                hint: hint
+                hint: hint,
+                difficulty: difficulty
             })
         })
         .then(response => response.json())
