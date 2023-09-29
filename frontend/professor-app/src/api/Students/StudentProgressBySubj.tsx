@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BarList, Card, Title, Bold, Flex, Text } from "@tremor/react";
 import { useParams } from 'react-router-dom';
 
-const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
-const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/';
+const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/students/';
+const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/questions/';
 
 function StudentProgress() {
     const [questions, setQuestions] = useState([]);

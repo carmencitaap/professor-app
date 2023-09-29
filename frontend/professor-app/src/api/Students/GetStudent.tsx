@@ -4,8 +4,8 @@ import StudentProgress from './StudentProgressBySubj';
 import StudentsByXP from './StudentsByXP';
 
 
-const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
-const TASK_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/tasks/';
+const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/students/';
+const TASK_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/tasks/';
 
 function GetStudent() {
     const [student, setStudent] = useState([]);

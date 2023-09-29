@@ -2,7 +2,7 @@ import { BarChart, Card, Subtitle, Title } from '@tremor/react';
 import React, { useEffect, useState } from 'react';
 import XPTable from './XPTable';
 
-const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
+const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/students/';
 
 function StudentsAndProgress() {
     const [students, setStudents] = useState([]);

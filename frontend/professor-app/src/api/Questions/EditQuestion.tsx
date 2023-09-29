@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/';
+const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/questions/';
 
 function EditQuestion(props: any) {
     console.log("flsflkjfkjdsl",props.questionId)

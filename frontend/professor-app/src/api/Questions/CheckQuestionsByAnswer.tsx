@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Card, DonutChart } from "@tremor/react";
 
-const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/students/';
-const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/questions/';
+const STUDENT_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/students/';
+const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/questions/';
 
 function CheckQuestionsByAns() {
     const [students, setStudents] = useState([]);
@@ -195,11 +195,11 @@ function CheckQuestionsByAns() {
     }
 
     return (
-        <div>
+        <div className="flex flex-row justify-center items-center">
             <div className="flex justify-center items-center">
-                <Card className="w-1/3 mb-10">
-                    <h1 className="text-2xl font-semibold"> Questions that have been the hardest </h1>
-                    <h4 className="text-sm font-light"> By how many times they were answered incorrectly </h4>
+                <Card className="mb-10 mr-6">
+                    <h1 className="text-2xl font-semibold"> Subjects that have been the hardest </h1>
+                    <h4 className="text-sm font-light"> By how many times their questions were answered incorrectly </h4>
                     <DonutChart
                     className="mt-6"
                     data={calculateFrequencies(questions,students)}
@@ -212,9 +212,9 @@ function CheckQuestionsByAns() {
             </div>
 
             <div className="flex justify-center items-center">
-                <Card className="w-1/3 mb-10">
-                    <h1 className="text-2xl font-semibold"> Questions that have been the easiest </h1>
-                    <h4 className="text-sm font-light"> By how many times they were answered correctly </h4>
+                <Card className="mb-10">
+                    <h1 className="text-2xl font-semibold"> Subjects that have been the easiest </h1>
+                    <h4 className="text-sm font-light"> By how many times their questions were answered correctly </h4>
                     <DonutChart
                     className="mt-6"
                     data={calculateCorrectFrequencies(questions,students)}

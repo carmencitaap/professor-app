@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ALTERNATIVE_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero.vercel.app/alternative/'
+const ALTERNATIVE_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.vercel.app/alternative/'
 
 function CreateAlternatives(props: any) {
     const [alternative, setAlternative] = useState("");
