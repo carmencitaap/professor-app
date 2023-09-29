@@ -8,7 +8,6 @@ const QUESTION_ENDPOINT = 'https://pds-p2-g5-avendano-brito-guerriero-virid.verc
 function ExceptionalQuestion() {
     const [students, setStudents] = useState([]);
 
-    const [incorrectlyAnsF, setIncorrectlyAnsF] = useState({});
     const [mostIncorrectly, setMostIncorrectly] = useState(null);
     const [showIncorrectly, setShowIncorrectly] = useState(false);
     const [mostIncorrectlyQuestion, setMostIncorrectlyQuestion] = useState(null);
@@ -57,7 +56,6 @@ function ExceptionalQuestion() {
             const toSortI = Object.entries(incorrectlyFrequency)
             const sortedIncorrect = toSortI.sort((a, b) => Number(b[1]) - Number(a[1]))
 
-            setIncorrectlyAnsF(sortedIncorrect)
 
             // setMostCorrectly(sortedCorrect[0][0])
             console.log("jdkfldkjf",sortedIncorrect)
