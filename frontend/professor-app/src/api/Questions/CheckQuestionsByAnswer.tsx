@@ -206,7 +206,7 @@ function CheckQuestionsByAns() {
                     category="frequency"
                     index="subject"
                     variant='pie'
-                    colors={["rose"]}
+                    colors={["rose", "violet", "indigo", "rose", "cyan", "amber"]}
                     />
                 </Card>
             </div>
@@ -221,7 +221,7 @@ function CheckQuestionsByAns() {
                     category="frequency"
                     index="subject"
                     variant='pie'
-                    colors={["green"]}
+                    colors={["green", "yellow", "orange", "indigo", "blue", "emerald"]}
                     />
                 </Card>
             </div>

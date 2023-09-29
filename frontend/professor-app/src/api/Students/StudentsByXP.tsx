@@ -35,10 +35,10 @@ function StudentsByXP() {
                             </div>
                             <div className="flex justify-between mb-1">
                                 <span className="text-base font-medium text-purple-800 dark:text-white">XP</span>
-                                <span className="text-sm font-medium text-purple-800 dark:text-white">{((student.xp)*100)/1200}%</span>
+                                <span className="text-sm font-medium text-purple-800 dark:text-white">{(((student.xp)*100)/1200) > 100 ? "100" : (((student.xp)*100)/1200)}%</span>
                                 </div>
                                 <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                <div className="bg-purple-800 h-2.5 rounded-full" style={{ width: `${((student.xp)*100)/1200}%`}}></div>
+                                <div className="bg-purple-800 h-2.5 rounded-full" style={{ width: `${(((student.xp)*100)/1200) > 100 ? "100" : (((student.xp)*100)/1200)}%`}}></div>
                             </div>
 
                         </div>
